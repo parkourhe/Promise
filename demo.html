@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<form action="" id="formDemo">
+			
+		
+	</form>
+	<script type="art/template" id="temp">
+			<div>
+					<label for="">用户名</label>
+					<input type="text" value="{{users.name}}">
+			</div>
+
+			<div>
+					<label for="">年龄</label>
+					<input type="text" value="{{users.age}}">
+			</div>
+			
+			<div>
+					<label for="">职业</label>
+					<select name="" id="">
+							{{each job}}
+								{{if $value.id==users.job}}
+								<option value="" selected>{{$value.name}}</option>
+								{{/if}}
+							{{/each}}
+					</select>				
+	
+			</div>
+
+	</script>
+	
+	<script src="../node_modules/jquery/dist/jquery.js"></script>
+	<script src="../node_modules/art-template/lib/template-web.js"></script>
+	<script>
+		 	
+		 	// 回调嵌套写法
+		// $.get('http://127.0.0.1:3001/users/4',function(res){
+
+		// 	$.get(`http://127.0.0.1:3001/job`,function(job){
+		// 		var html = template("temp",{
+		// 			users : res,
+		// 			job : job
+		// 		})
+				
+		// 		console.log(html);
+		// 		document.querySelector('#formDemo').innerHTML=html
+
+
+		// 	})
+
+			
+			
+			
+		// })
+
+
+
+		// jquery Promise写法
+		// var data = {}
+		// $.get('http://127.0.0.1:3001/users/4')
+		// 	.then(function(res){
+		// 		data.users = res
+		// 		return $.get('http://127.0.0.1:3001/job')
+		// 	})
+		// 	.then(function(res){
+
+		// 		data.job = res
+
+		// 		var html = template("temp",data)
+		// 		document.querySelector('#formDemo').innerHTML=html
+		// 	})
+
+			
+			
+
+			// ES6写法 	Promise写法
+
+			let data = {}
+
+			$.get('http://127.0.0.1:3001/users/4')
+
+			.then((res)=>{
+				data.users = res
+				return $.get('http://127.0.0.1:3001/job')
+			})
+			.then((res)=>{
+
+				data.job = res
+				let html = template("temp",data)
+				document.querySelector('#formDemo').innerHTML=html
+
+
+			})
+
+
+
+
+
+	</script>
+	
+
+</body>
+</html>
